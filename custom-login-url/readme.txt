@@ -1,9 +1,9 @@
 === Custom Login URL ===
 Contributors: gwin
 Tags: custom login url, custom registration url
-Requires at least: 3.8.0
-Tested up to: 4.2.2
-Stable tag: 1.0.2
+Requires at least: 6.0
+Tested up to: 6.8
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ Whitelabel your site by hiding wp-login.php in the login and registration URLs
 Custom Login URL (CLU) is a lightweight plugin that allows to customize default WP login, registration and password
 reminder URLs without modifying any files, simple and swift.
 
-Why would anyone would want to use this plugin? Well, after developing [WPHelpDesk](http://wphelpdesk.com/) it turned 
+Why would anyone would want to use this plugin? Well, after developing some sites it turned 
 out that site owners do not want to reveal to customers that they are using WordPress, hence the plugin that will mask
 original URLs.
 
@@ -42,6 +42,9 @@ In order to make the plugin work you need to have Permalinks enabled in WP Setti
 
 == Changelog ==
 
+= 1.0.3 =
+* FIXED: Broken Access Control vulnerability
+* FIXED: Warnings in the wp-admin -> Settings -> Options when no custom links are set.
 = 1.0.2 =
 * FIXED: Some 'notices' and 'warnings'
 * FIXED: Correct stable tag set.

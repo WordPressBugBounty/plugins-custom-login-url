@@ -21,6 +21,10 @@ function clu_options_validate($input) {
 
     $options = get_option('clu_config');
     
+    if ( ! isset( $_POST['clu_config_nonce'] ) || ! wp_verify_nonce( $_POST['clu_config_nonce'], 'clu-config-nonce' ) ) {
+        return[];
+    }
+
     if(!is_array($options)) {
         $options = array();
     }
@@ -51,9 +55,12 @@ function clu_redirects_section() {
 
 function clu_login_url_input() {
     $options = get_option('clu_config');
+
+    wp_nonce_field( 'clu-config-nonce', 'clu_config_nonce' );
+
     ?>
         <code><?php esc_html_e(site_url()) ?></code>
-        <input id='clu_login_url' name='clu_config[login]' size='40' type='text' value='<?php esc_attr_e($options["login"]) ?>' placeholder="/wp-login.php" />
+        <input id='clu_login_url' name='clu_config[login]' size='40' type='text' value='<?php echo esc_attr($options["login"] ?? "") ?>' placeholder="/wp-login.php" />
     <?php
 }
 
@@ -61,7 +68,7 @@ function clu_register_url_input() {
     $options = get_option('clu_config');
     ?>
         <code><?php esc_html_e(site_url()) ?></code>
-        <input id='clu_register_url' name='clu_config[register]' size='40' type='text' value='<?php esc_attr_e($options["register"]) ?>' placeholder="/wp-login.php?action=register" />
+        <input id='clu_register_url' name='clu_config[register]' size='40' type='text' value='<?php echo esc_attr($options["register"] ?? "") ?>' placeholder="/wp-login.php?action=register" />
     <?php
 }
 
@@ -69,7 +76,7 @@ function clu_lostpassword_url_input() {
     $options = get_option('clu_config');
     ?>
         <code><?php esc_html_e(site_url()) ?></code>
-        <input id='clu_lostpassword_url' name='clu_config[lostpassword]' size='40' type='text' value='<?php esc_attr_e($options["lostpassword"]) ?>' placeholder="/wp-login.php?action=lostpassword" />
+        <input id='clu_lostpassword_url' name='clu_config[lostpassword]' size='40' type='text' value='<?php echo esc_attr($options["lostpassword"] ?? "") ?>' placeholder="/wp-login.php?action=lostpassword" />
     <?php
 }
 
@@ -77,7 +84,7 @@ function clu_logout_url_input() {
     $options = get_option('clu_config');
     ?>
         <code><?php esc_html_e(site_url()) ?></code>
-        <input id='clu_logout_url' name='clu_config[logout]' size='40' type='text' value='<?php esc_attr_e($options["logout"]) ?>' placeholder="/wp-login.php?action=logout" />
+        <input id='clu_logout_url' name='clu_config[logout]' size='40' type='text' value='<?php echo esc_attr($options["logout"] ?? "") ?>' placeholder="/wp-login.php?action=logout" />
     <?php
 }
 
@@ -85,7 +92,7 @@ function clu_login_redirect_input() {
     $options = get_option('clu_config');
     ?>
         <code><?php esc_html_e(site_url()) ?></code>
-        <input id='clu_login_redirect' name='clu_config[redirect_login]' size='40' type='text' value='<?php esc_attr_e($options["redirect_login"]) ?>' placeholder="/wp-admin/" />
+        <input id='clu_login_redirect' name='clu_config[redirect_login]' size='40' type='text' value='<?php echo esc_attr($options["redirect_login"] ?? "") ?>' placeholder="/wp-admin/" />
     <?php
 }
 
@@ -93,6 +100,6 @@ function clu_logout_redirect_input() {
     $options = get_option('clu_config');
     ?>
         <code><?php esc_html_e(site_url()) ?></code>
-        <input id='clu_logout_redirect' name='clu_config[redirect_logout]' size='40' type='text' value='<?php esc_attr_e($options["redirect_logout"]) ?>' placeholder="/" />
+        <input id='clu_logout_redirect' name='clu_config[redirect_logout]' size='40' type='text' value='<?php echo esc_attr($options["redirect_logout"] ?? "") ?>' placeholder="/" />
     <?php
 }
